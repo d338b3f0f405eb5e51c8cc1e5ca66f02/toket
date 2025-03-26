@@ -393,7 +393,7 @@ jobs:
           repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
-          sudo apt install -y  rsync
+          apk add --update --no-cache --no-progress rsync
           rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
