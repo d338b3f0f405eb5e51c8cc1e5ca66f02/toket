@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/token'
+          repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
           pkg_add rsync
@@ -78,7 +78,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/token'
+          repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
           brew install rsync
@@ -151,7 +151,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/token'
+          repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
           pkg_add rsync
@@ -234,7 +234,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/token'
+          repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
           pkg_add rsync
@@ -386,7 +386,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/token'
+          repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
           apk add --update --no-cache --no-progress rsync
