@@ -17,22 +17,27 @@ jobs:
 
       # Step 2: Modify files and directories
       - name: 🔄 Modify Source Files
-        shell: bash
+        shell: sh
         run: |
           sudo apt install -y rsync
-          rm -rf .git && while read -r part; do
-          # Adjust paths and update file contents as per rules
-          mod=$(echo "$part" | sed -E \
-          -e 's/^\./\/tmp\/source/g' \
-          -e 's/netcat/memew/g' \
-          -e 's/gsocket/toket/g')
-
-          if [[ -d $part ]]; then
-            # Create directory in target path
+          # Remove `.git` directory if it exists
+            rm -rf .git
+          
+            # Loop through each file/directory found in the current directory
+            find . | while IFS= read -r part; do
+            # Adjust paths and update contents based on specific rules
+            mod=$(echo "$part" | sed -E \
+            -e 's/^\./\/tmp\/source/g' \
+            -e 's/netcat/memew/g' \
+            -e 's/gsocket/toket/g')
+          
+            # If it's a directory, create the corresponding directory in the modified path
+            if [ -d "$part" ]; then
             mkdir -p "$(dirname "$mod")"
-            echo "📁 Created directory: $mod"
-          elif [[ -f $part ]]; then
-            # Process file and copy with modification
+          echo "📁 Created directory: $mod"
+          
+          # If it's a file, process the file and copy to the modified path
+            elif [ -f "$part" ]; then
             mkdir -p "$(dirname "$mod")"
             sed -E \
             -e 's/netcat/memew/g' \
@@ -40,16 +45,26 @@ jobs:
             -e 's/GSOCKET/TOKET/g' \
             -e 's/gsocket/toket/g' \
             "$part" > "$mod"
-            echo "✅ Processed file: $part ➡️ $mod"
-          fi
-          done < <(find .)
-
-          # Synchronize modified files and reset permissions
-          rsync -pav --exclude '.git' /tmp/source/ . --delete
-          chmod +x ./bootstrap
-          find . -iname "*.sh" -exec chmod +x {} \;
-
-          echo "🎉 All operations have been completed successfully!"
+          echo "✅ Processed file: $part ➡️ $mod"
+            fi
+            done
+          
+            # Synchronize modified files back to project directory and reset permissions
+            rsync -pav --exclude '.git' /tmp/source/ . --delete
+            echo "🔄 Synchronized changes to the current directory"
+          
+            # Set executable permissions for the bootstrap script if it exists
+            if [ -f ./bootstrap ]; then
+            chmod +x ./bootstrap
+            echo "✅ Set executable permissions on ./bootstrap"
+            fi
+          
+            # Set executable permissions for all shell scripts in the current directory
+            find . -iname "*.sh" -exec chmod +x {} \;
+            echo "✅ Updated permissions for all shell scripts"
+          
+            # Final success message
+            echo "🎉 All operations have been completed successfully!"
 
       # Step 3: Install dependencies
       - name: 📦 Install Dependencies
