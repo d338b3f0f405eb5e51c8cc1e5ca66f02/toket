@@ -56,7 +56,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -pav /tmp/source/ . --delete
+          rsync -pav --exclude '.git'  /tmp/source/ . --delete
           find  . -iname "*.sh"  -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
       - name: dist
@@ -113,7 +113,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -pav /tmp/source/ . --delete
+          rsync -pav --exclude '.git'  /tmp/source/ . --delete
           find  . -iname "*.sh"  -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
@@ -187,7 +187,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -pav /tmp/source/ . --delete
+          rsync -pav --exclude '.git'  /tmp/source/ . --delete
           find  . -iname "*.sh"  -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
@@ -271,7 +271,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -pav /tmp/source/ . --delete
+          rsync -pav --exclude '.git'  /tmp/source/ . --delete
           find  . -iname "*.sh"  -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
@@ -424,7 +424,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -pav /tmp/source/ . --delete
+          rsync -pav --exclude '.git'  /tmp/source/ . --delete
           find  . -iname "*.sh"  -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
