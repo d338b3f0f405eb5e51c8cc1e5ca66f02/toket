@@ -1,10 +1,8 @@
 name: Static Post-Release Build
-# on: [push]
-#
-# on:
-#   release:
-#     types: [published]
-on: [workflow_dispatch]
+on:
+  push:
+  workflow_dispatch:
+
 # TODO:
 # - Can we check out first, bootstrap and then cache/upload/download into container?
 # - Build for sunOS?

@@ -13,6 +13,8 @@ jobs:
     runs-on: macos-13
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: 'hackerschoice/gsocket'
       - name: Compile
         run: |
           brew install automake
@@ -53,6 +55,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 'hackerschoice/gsocket'
       - name: Starting the VM
         uses: vmactions/openbsd-vm@v1
         with:
@@ -91,6 +95,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: 'hackerschoice/gsocket'
       - name: Starting the VM
         uses: vmactions/freebsd-vm@v1
         with:
@@ -154,6 +160,8 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v3
+        with:
+          repository: 'hackerschoice/gsocket'
       - name: Add build dependencies
         run: |
           apk add --update --no-cache --no-progress bash perl make curl upx tar dpkg autoconf automake

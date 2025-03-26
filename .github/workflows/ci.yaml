@@ -4,7 +4,9 @@ name: Run Tests
   #  branches:
   #  - master
   #pull_request:
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+
 
 
 jobs:
@@ -13,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        repository: 'hackerschoice/gsocket'
+
     - name: Install dependencies
       run: |
         for TOOL in automake autoconf socat sshd sshfs; do
