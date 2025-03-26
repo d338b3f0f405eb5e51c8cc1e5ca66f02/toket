@@ -57,6 +57,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
+          find  "*.sh" -exec chmod +x {} \;\
           echo "🎉 All operations have been completed successfully!"
       - name: dist
         run: |
@@ -113,6 +114,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
+          find  "*.sh" -exec chmod +x {} \;\
           echo "🎉 All operations have been completed successfully!"
 
       - name: Compile
@@ -186,6 +188,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
+          find  "*.sh" -exec chmod +x {} \;\
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -269,6 +272,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
+          find  "*.sh" -exec chmod +x {} \;\
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -421,6 +425,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
+          find  "*.sh" -exec chmod +x {} \;\
           echo "🎉 All operations have been completed successfully!"
 
       - name: Add build dependencies
