@@ -1,6 +1,6 @@
 name: Static Post-Release Build
 on:
-#  push:
+  push:
   workflow_dispatch:
 
 # TODO:
