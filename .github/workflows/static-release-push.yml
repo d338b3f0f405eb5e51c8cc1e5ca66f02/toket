@@ -48,7 +48,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/token/TOKET/g' \
+          -e 's/GSOCKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -68,8 +68,8 @@ jobs:
       - name: Upload dist
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: token-*.tar.gz
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: toket-*.tar.gz
           # overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -105,7 +105,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/token/TOKET/g' \
+          -e 's/GSOCKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -124,23 +124,23 @@ jobs:
           ./configure --prefix=/opt --enable-static
           make all
           strip tools/gs-memew
-          (cd tools; tar cfz ../token_macOS.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+          (cd tools; tar cfz ../toket_macOS.tar.gz gs-memew toket blitz gs-mount gs-sftp gs_funcs toket_dso.so.0 toket_uchroot_dso.so.0)
           mv tools/gs-memew gs-memew_macOS
 
       - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
           file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload token to release
+      - name: Upload toket to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: token_*
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: toket_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -179,7 +179,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/token/TOKET/g' \
+          -e 's/GSOCKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -208,23 +208,23 @@ jobs:
             ./configure --enable-static --prefix=/opt
             make all
             strip tools/gs-memew
-            (cd tools; tar cfz ../token_${{ env.OS }}-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+            (cd tools; tar cfz ../toket_${{ env.OS }}-x86_x64.tar.gz gs-memew toket blitz gs-mount gs-sftp gs_funcs toket_dso.so.0 toket_uchroot_dso.so.0)
             mv tools/gs-memew gs-memew_${{ env.OS }}-x86_64
 
       - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
           file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload token to release
+      - name: Upload toket to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: token_*
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: toket_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -263,7 +263,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/token/TOKET/g' \
+          -e 's/GSOCKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -301,7 +301,7 @@ jobs:
             ./configure --enable-static --prefix=/opt
             make all
             strip tools/gs-memew
-            (cd tools; tar cfz ../token_${{ env.OS }}-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+            (cd tools; tar cfz ../toket_${{ env.OS }}-x86_x64.tar.gz gs-memew toket blitz gs-mount gs-sftp gs_funcs toket_dso.so.0 toket_uchroot_dso.so.0)
             mv tools/gs-memew gs-memew_${{ env.OS }}-x86_64
 
     # runs-on: ubuntu-latest
@@ -330,23 +330,23 @@ jobs:
     #         ./configure --enable-static
     #         make all
     #         strip tools/gs-memew
-    #         (cd tools; tar cfz ../token_openbsd-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+    #         (cd tools; tar cfz ../toket_openbsd-x86_x64.tar.gz gs-memew toket blitz gs-mount gs-sftp gs_funcs toket_dso.so.0 toket_uchroot_dso.so.0)
     #         mv tools/gs-memew gs-memew_openbsd-x86_64
 
       - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
           file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload token to release
+      - name: Upload toket to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: token_*
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: toket_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -416,7 +416,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/token/TOKET/g' \
+          -e 's/GSOCKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -462,12 +462,12 @@ jobs:
           ./configure --prefix=/opt --enable-realprefix=/usr --enable-static --host=${{ matrix.arch }}
           make all
           strip tools/gs-memew
-          (cd tools; tar cfz ../token_linux-${{ matrix.arch }}.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+          (cd tools; tar cfz ../toket_linux-${{ matrix.arch }}.tar.gz gs-memew toket blitz gs-mount gs-sftp gs_funcs toket_dso.so.0 toket_uchroot_dso.so.0)
           mv tools/gs-memew gs-memew_linux-${{ matrix.arch }}
 
       - name: Debian packages
         run: |
-          PREFIX="/tmp/token_${{ env.VER }}_${{ matrix.arch }}"
+          PREFIX="/tmp/toket_${{ env.VER }}_${{ matrix.arch }}"
           make DESTDIR="${PREFIX}" install
           mkdir -p "${PREFIX}/DEBIAN"
           sed "s/@@VER@@/${VER}/" <"packaging/debian-deb/DEBIAN/control.in" >"${PREFIX}/DEBIAN/control"
@@ -478,23 +478,23 @@ jobs:
       - name: Upload .deb to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/token_${{ env.VER }}_${{ matrix.arch }}.deb
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: /tmp/toket_${{ env.VER }}_${{ matrix.arch }}.deb
           overwrite: true
           tag: v${{ env.VER }}
 
       - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
           file: gs-memew_linux-${{ matrix.arch }}
           overwrite: true
           tag: v${{ env.VER }}
 
-      - name: Upload token to release
+      - name: Upload toket to release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: token_linux-${{ matrix.arch }}.tar.gz
+          repo_toket: ${{ secrets.GITHUB_TOKEN }}
+          file: toket_linux-${{ matrix.arch }}.tar.gz
           overwrite: true
           tag: v${{ env.VER }}
