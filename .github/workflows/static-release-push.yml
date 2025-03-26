@@ -26,7 +26,7 @@ jobs:
       - name: modify
         run: |
           sudo apt install -y rsync
-          while read -r part; do
+          rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
           -e 's/^\./\/tmp\/source/g' \
@@ -83,7 +83,7 @@ jobs:
       - name: modify
         run: |
           brew install rsync
-          while read -r part; do
+          rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
           -e 's/^\./\/tmp\/source/g' \
@@ -157,7 +157,7 @@ jobs:
       - name: modify
         run: |
           sudo apt install -y  rsync
-          while read -r part; do
+          rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
           -e 's/^\./\/tmp\/source/g' \
@@ -241,7 +241,7 @@ jobs:
       - name: modify
         run: |
           sudo apt install  -y rsync
-          while read -r part; do
+          rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
           -e 's/^\./\/tmp\/source/g' \
@@ -394,7 +394,7 @@ jobs:
       - name: modify
         run: |
           sudo apt install -y  rsync
-          while read -r part; do
+          rm -rf .git && while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
           -e 's/^\./\/tmp\/source/g' \
