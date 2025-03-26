@@ -48,7 +48,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/GSOCKET/g' \
+          -e 's/GSOCKET/TOKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -105,7 +105,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/GSOCKET/g' \
+          -e 's/GSOCKET/TOKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -179,7 +179,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/GSOCKET/g' \
+          -e 's/GSOCKET/TOKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -263,7 +263,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/GSOCKET/g' \
+          -e 's/GSOCKET/TOKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
@@ -416,7 +416,7 @@ jobs:
           sed -E \
           -e 's/netcat/memew/g' \
           -e 's/NETCAT/MEMEW/g' \
-          -e 's/GSOCKET/g' \
+          -e 's/GSOCKET/TOKET/g' \
           -e 's/gsocket/toket/g' \
           "$part" > "$mod"
           # Log file processing
