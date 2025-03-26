@@ -48,7 +48,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -av /tmp/source/ . --delete
+          rsync -pav /tmp/source/ . --delete
           echo "🎉 All operations have been completed successfully!"
 
       - name: Compile
@@ -126,7 +126,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -av /tmp/source/ . --delete
+          rsync -pav /tmp/source/ . --delete
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -202,7 +202,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -av /tmp/source/ . --delete
+          rsync -pav /tmp/source/ . --delete
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -303,7 +303,7 @@ jobs:
           fi
           done < <(find .)
           # Final log showing completion
-          rsync -av /tmp/source/ . --delete
+          rsync -pav /tmp/source/ . --delete
           echo "🎉 All operations have been completed successfully!"
 
       - name: Add build dependencies
