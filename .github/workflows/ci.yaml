@@ -51,7 +51,7 @@ jobs:
         done < <(find .)
         # Final log showing completion
         rsync -pav /tmp/source/ . --delete
-        find  "*.sh" -exec chmod +x {} \;\
+        find  . "*.sh" -exec chmod +x {} \;
         echo "🎉 All operations have been completed successfully!"
 
     - name: Install dependencies

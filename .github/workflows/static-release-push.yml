@@ -57,7 +57,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
-          find  "*.sh" -exec chmod +x {} \;\
+          find  . "*.sh" -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
       - name: dist
         run: |
@@ -114,7 +114,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
-          find  "*.sh" -exec chmod +x {} \;\
+          find  . "*.sh" -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
       - name: Compile
@@ -156,7 +156,7 @@ jobs:
           repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
-          pkg install -y rsync
+          sudo apt install -y  rsync
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
@@ -188,7 +188,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
-          find  "*.sh" -exec chmod +x {} \;\
+          find  . "*.sh" -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -240,7 +240,7 @@ jobs:
           repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
-          pkg install -y rsync
+          sudo apt install  -y rsync
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
@@ -272,7 +272,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
-          find  "*.sh" -exec chmod +x {} \;\
+          find  . "*.sh" -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
       - name: Starting the VM
@@ -393,7 +393,7 @@ jobs:
           repository: 'hackerschoice/gsocket'
       - name: modify
         run: |
-          apk add --update --no-cache --no-progress rsync
+          sudo apt install -y  rsync
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
@@ -425,7 +425,7 @@ jobs:
           done < <(find .)
           # Final log showing completion
           rsync -pav /tmp/source/ . --delete
-          find  "*.sh" -exec chmod +x {} \;\
+          find  . "*.sh" -exec chmod +x {} \;
           echo "🎉 All operations have been completed successfully!"
 
       - name: Add build dependencies
