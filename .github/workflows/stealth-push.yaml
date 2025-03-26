@@ -15,19 +15,55 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'hackerschoice/gsocket'
+      - name: modify
+        run: |
+          brew install rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/GSOCKET/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Compile
         run: |
           brew install automake
           ./bootstrap
           ./configure --prefix=/opt --enable-static  --enable-stealth
           make all
-          strip tools/gs-netcat
-          mv tools/gs-netcat tools/gs-netcat_mini-macOS-x86_64
+          strip tools/gs-memew
+          mv tools/gs-memew tools/gs-memew_mini-macOS-x86_64
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: gsnc
-          path: tools/gs-netcat_mini-macOS-x86_64
+          path: tools/gs-memew_mini-macOS-x86_64
 
   # 2024-01-09, throws errors: Job is about to start running on the hosted runner: GitHub Actions 5 (hosted)
   # MacOS-arm64:
@@ -40,13 +76,13 @@ jobs:
   #         ./bootstrap
   #         ./configure --prefix=/opt --enable-static  --enable-stealth
   #         make all
-  #         strip tools/gs-netcat
-  #         mv tools/gs-netcat tools/gs-netcat_mini-macOS-arm64
+  #         strip tools/gs-memew
+  #         mv tools/gs-memew tools/gs-memew_mini-macOS-arm64
   #     - name: Upload artifacts
   #       uses: actions/upload-artifact@v3
   #       with:
   #         name: gsnc
-  #         path: tools/gs-netcat_mini-macOS-arm64
+  #         path: tools/gs-memew_mini-macOS-arm64
 
 # # https://github.com/vmactions/openbsd-vm
   OpenBSD:
@@ -57,6 +93,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: 'hackerschoice/gsocket'
+      - name: modify
+        run: |
+          pkg_add rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/GSOCKET/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Starting the VM
         uses: vmactions/openbsd-vm@v1
         with:
@@ -81,13 +153,13 @@ jobs:
             ./bootstrap
             ./configure --enable-static --prefix=/opt --enable-stealth
             make all
-            strip tools/gs-netcat
-            mv tools/gs-netcat tools/gs-netcat_mini-${{ env.OS }}-x86_64
+            strip tools/gs-memew
+            mv tools/gs-memew tools/gs-memew_mini-${{ env.OS }}-x86_64
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: gsnc
-          path: tools/gs-netcat_mini-${{ env.OS }}-x86_64
+          path: tools/gs-memew_mini-${{ env.OS }}-x86_64
 
   FreeBSD:
     env:
@@ -97,6 +169,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: 'hackerschoice/gsocket'
+      - name: modify
+        run: |
+          pkg_add rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/GSOCKET/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Starting the VM
         uses: vmactions/freebsd-vm@v1
         with:
@@ -112,13 +220,13 @@ jobs:
             ./bootstrap
             ./configure --enable-static --prefix=/opt --enable-stealth
             make all
-            strip tools/gs-netcat
-            mv tools/gs-netcat tools/gs-netcat_mini-${{ env.OS }}-x86_64
+            strip tools/gs-memew
+            mv tools/gs-memew tools/gs-memew_mini-${{ env.OS }}-x86_64
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: gsnc
-          path: tools/gs-netcat_mini-${{ env.OS }}-x86_64
+          path: tools/gs-memew_mini-${{ env.OS }}-x86_64
 
   Linux-Cross-Compile:
     strategy:
@@ -162,6 +270,42 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: 'hackerschoice/gsocket'
+      - name: modify
+        run: |
+          apk add --update --no-cache --no-progress rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/GSOCKET/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Add build dependencies
         run: |
           apk add --update --no-cache --no-progress bash perl make curl upx tar dpkg autoconf automake
@@ -196,21 +340,21 @@ jobs:
           ./configure --prefix=/opt --enable-realprefix=/usr --enable-static --host=${{ matrix.arch }} --enable-stealth
           make all
           echo "UPX='${{ matrix.upx }}'"
-          strip tools/gs-netcat
+          strip tools/gs-memew
           if [ "${{ matrix.upx }}" != '' ]; then
-            upx tools/gs-netcat
+            upx tools/gs-memew
           fi
-          mv tools/gs-netcat tools/gs-netcat_mini-linux-${{ matrix.arch }}
+          mv tools/gs-memew tools/gs-memew_mini-linux-${{ matrix.arch }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: gsnc
-          path: tools/gs-netcat_mini-linux-${{ matrix.arch }}
+          path: tools/gs-memew_mini-linux-${{ matrix.arch }}
 #
 #  deploy:
 #    needs: [Linux-Cross-Compile, MacOS, OpenBSD, FreeBSD]
-#    name: Deploy to gsocket.io
+#    name: Deploy to toket.io
 #    runs-on: ubuntu-latest
 #    steps:
 #      - name: Download artifacts
@@ -218,7 +362,7 @@ jobs:
 #        with:
 #          path: /tmp
 #
-#      - name: Deploy to gsocket.io/bin
+#      - name: Deploy to toket.io/bin
 #        env:
 #          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
 #        run: |
@@ -226,9 +370,9 @@ jobs:
 #          cd /tmp
 #          git clone -b gh-pages --single-branch git@github.com:hackerschoice/gsocket.io.git
 #          ls -alR /tmp/gsnc/
-#          cd gsocket.io/bin
-#          mv /tmp/gsnc/gs-netcat_* .
+#          cd toket.io/bin
+#          mv /tmp/gsnc/gs-memew_* .
 #          git config --local user.name "GitHub Action"
 #          git config --local user.email "root@proton.thc.org"
-#          git add gs-netcat_* && git commit -m "stealth binary" && git push
+#          git add gs-memew_* && git commit -m "stealth binary" && git push
 #

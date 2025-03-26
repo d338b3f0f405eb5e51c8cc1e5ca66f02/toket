@@ -8,3 +8,5 @@ config/
 configure
 configure~
 .idea
+source/
+mod/

@@ -17,6 +17,41 @@ jobs:
     - uses: actions/checkout@v3
       with:
         repository: 'hackerschoice/gsocket'
+    - name: modify
+      run: |
+        pkg_add rsync
+        while read -r part; do
+        # Modify the path and file contents based on the specified rules
+        mod=$(echo "$part" | sed -E \
+        -e 's/^\.\//\/tmp\/source/g' \
+        -e 's/netcat/memew/g' \
+        -e 's/gsocket/toket/g')
+    
+        # Check if the current item is a directory
+        if [[ -d $part ]]; then
+        # Create the corresponding directory in the target path
+        mkdir -p "$(dirname "$mod")"
+        # Log directory creation
+        echo "📁 Created directory: $mod"
+    
+        # Check if the current item is a file
+        elif [[ -f $part ]]; then
+        # Create the directory for the target file if necessary
+        mkdir -p "$(dirname "$mod")"
+        # Process and copy the file with modified content
+        sed -E \
+        -e 's/netcat/memew/g' \
+        -e 's/NETCAT/MEMEW/g' \
+        -e 's/GSOCKET/TOKET/g' \
+        -e 's/gsocket/toket/g' \
+        "$part" > "$mod"
+        # Log file processing
+        echo "✅ Processed file: $part ➡️ $mod"
+        fi
+        done < <(find .)
+        # Final log showing completion
+        rsync -av /tmp/source/ . --delete
+        echo "🎉 All operations have been completed successfully!"
 
     - name: Install dependencies
       run: |

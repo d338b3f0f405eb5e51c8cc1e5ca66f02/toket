@@ -1,6 +1,6 @@
 name: Static Post-Release Build
 on:
-  push:
+#  push:
   workflow_dispatch:
 
 # TODO:
@@ -22,7 +22,42 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/gsocket'
+          repository: 'hackerschoice/token'
+      - name: modify
+        run: |
+          pkg_add rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/token/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
       - name: dist
         run: |
           ./bootstrap
@@ -33,7 +68,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gsocket-*.tar.gz
+          file: token-*.tar.gz
           # overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -43,31 +78,67 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/gsocket'
+          repository: 'hackerschoice/token'
+      - name: modify
+        run: |
+          brew install rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/token/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Compile
         run: |
           brew install automake
           ./bootstrap
           ./configure --prefix=/opt --enable-static
           make all
-          strip tools/gs-netcat
-          (cd tools; tar cfz ../gsocket_macOS.tar.gz gs-netcat gsocket blitz gs-mount gs-sftp gs_funcs gsocket_dso.so.0 gsocket_uchroot_dso.so.0)
-          mv tools/gs-netcat gs-netcat_macOS
+          strip tools/gs-memew
+          (cd tools; tar cfz ../token_macOS.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+          mv tools/gs-memew gs-memew_macOS
 
-      - name: Upload gs-netcat to release
+      - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gs-netcat_*
+          file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload gsocket to release
+      - name: Upload token to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gsocket_*
+          file: token_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -80,7 +151,43 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/gsocket'
+          repository: 'hackerschoice/token'
+      - name: modify
+        run: |
+          pkg_add rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/token/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Starting the VM
         uses: vmactions/freebsd-vm@v1
         with:
@@ -97,24 +204,24 @@ jobs:
             ./bootstrap
             ./configure --enable-static --prefix=/opt
             make all
-            strip tools/gs-netcat
-            (cd tools; tar cfz ../gsocket_${{ env.OS }}-x86_x64.tar.gz gs-netcat gsocket blitz gs-mount gs-sftp gs_funcs gsocket_dso.so.0 gsocket_uchroot_dso.so.0)
-            mv tools/gs-netcat gs-netcat_${{ env.OS }}-x86_64
+            strip tools/gs-memew
+            (cd tools; tar cfz ../token_${{ env.OS }}-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+            mv tools/gs-memew gs-memew_${{ env.OS }}-x86_64
 
-      - name: Upload gs-netcat to release
+      - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gs-netcat_*
+          file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload gsocket to release
+      - name: Upload token to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gsocket_*
+          file: token_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -127,7 +234,43 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/gsocket'
+          repository: 'hackerschoice/token'
+      - name: modify
+        run: |
+          pkg_add rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/token/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Starting the VM
         uses: vmactions/openbsd-vm@v1
         with:
@@ -153,9 +296,9 @@ jobs:
             ./bootstrap
             ./configure --enable-static --prefix=/opt
             make all
-            strip tools/gs-netcat
-            (cd tools; tar cfz ../gsocket_${{ env.OS }}-x86_x64.tar.gz gs-netcat gsocket blitz gs-mount gs-sftp gs_funcs gsocket_dso.so.0 gsocket_uchroot_dso.so.0)
-            mv tools/gs-netcat gs-netcat_${{ env.OS }}-x86_64
+            strip tools/gs-memew
+            (cd tools; tar cfz ../token_${{ env.OS }}-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+            mv tools/gs-memew gs-memew_${{ env.OS }}-x86_64
 
     # runs-on: ubuntu-latest
     # steps:
@@ -182,24 +325,24 @@ jobs:
     #         export LDFLAGS="-L/usr/local/lib/eopenssl30/"
     #         ./configure --enable-static
     #         make all
-    #         strip tools/gs-netcat
-    #         (cd tools; tar cfz ../gsocket_openbsd-x86_x64.tar.gz gs-netcat gsocket blitz gs-mount gs-sftp gs_funcs gsocket_dso.so.0 gsocket_uchroot_dso.so.0)
-    #         mv tools/gs-netcat gs-netcat_openbsd-x86_64
+    #         strip tools/gs-memew
+    #         (cd tools; tar cfz ../token_openbsd-x86_x64.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+    #         mv tools/gs-memew gs-memew_openbsd-x86_64
 
-      - name: Upload gs-netcat to release
+      - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gs-netcat_*
+          file: gs-memew_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
 
-      - name: Upload gsocket to release
+      - name: Upload token to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gsocket_*
+          file: token_*
           overwrite: true
           file_glob: true
           tag: v${{ env.VER }}
@@ -243,7 +386,43 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'hackerschoice/gsocket'
+          repository: 'hackerschoice/token'
+      - name: modify
+        run: |
+          apk add --update --no-cache --no-progress rsync
+          while read -r part; do
+          # Modify the path and file contents based on the specified rules
+          mod=$(echo "$part" | sed -E \
+          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/netcat/memew/g' \
+          -e 's/gsocket/toket/g')
+          
+          # Check if the current item is a directory
+          if [[ -d $part ]]; then
+          # Create the corresponding directory in the target path
+          mkdir -p "$(dirname "$mod")"
+          # Log directory creation
+          echo "📁 Created directory: $mod"
+          
+          # Check if the current item is a file
+          elif [[ -f $part ]]; then
+          # Create the directory for the target file if necessary
+          mkdir -p "$(dirname "$mod")"
+          # Process and copy the file with modified content
+          sed -E \
+          -e 's/netcat/memew/g' \
+          -e 's/NETCAT/MEMEW/g' \
+          -e 's/token/TOKET/g' \
+          -e 's/gsocket/toket/g' \
+          "$part" > "$mod"
+          # Log file processing
+          echo "✅ Processed file: $part ➡️ $mod"
+          fi
+          done < <(find .)
+          # Final log showing completion
+          rsync -av /tmp/source/ . --delete
+          echo "🎉 All operations have been completed successfully!"
+
       - name: Add build dependencies
         run: |
           apk add --update --no-cache --no-progress bash perl make curl upx tar dpkg
@@ -277,13 +456,13 @@ jobs:
           ./bootstrap
           ./configure --prefix=/opt --enable-realprefix=/usr --enable-static --host=${{ matrix.arch }}
           make all
-          strip tools/gs-netcat
-          (cd tools; tar cfz ../gsocket_linux-${{ matrix.arch }}.tar.gz gs-netcat gsocket blitz gs-mount gs-sftp gs_funcs gsocket_dso.so.0 gsocket_uchroot_dso.so.0)
-          mv tools/gs-netcat gs-netcat_linux-${{ matrix.arch }}
+          strip tools/gs-memew
+          (cd tools; tar cfz ../token_linux-${{ matrix.arch }}.tar.gz gs-memew token blitz gs-mount gs-sftp gs_funcs token_dso.so.0 token_uchroot_dso.so.0)
+          mv tools/gs-memew gs-memew_linux-${{ matrix.arch }}
 
       - name: Debian packages
         run: |
-          PREFIX="/tmp/gsocket_${{ env.VER }}_${{ matrix.arch }}"
+          PREFIX="/tmp/token_${{ env.VER }}_${{ matrix.arch }}"
           make DESTDIR="${PREFIX}" install
           mkdir -p "${PREFIX}/DEBIAN"
           sed "s/@@VER@@/${VER}/" <"packaging/debian-deb/DEBIAN/control.in" >"${PREFIX}/DEBIAN/control"
@@ -295,22 +474,22 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/gsocket_${{ env.VER }}_${{ matrix.arch }}.deb
+          file: /tmp/token_${{ env.VER }}_${{ matrix.arch }}.deb
           overwrite: true
           tag: v${{ env.VER }}
 
-      - name: Upload gs-netcat to release
+      - name: Upload gs-memew to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gs-netcat_linux-${{ matrix.arch }}
+          file: gs-memew_linux-${{ matrix.arch }}
           overwrite: true
           tag: v${{ env.VER }}
 
-      - name: Upload gsocket to release
+      - name: Upload token to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: gsocket_linux-${{ matrix.arch }}.tar.gz
+          file: token_linux-${{ matrix.arch }}.tar.gz
           overwrite: true
           tag: v${{ env.VER }}
