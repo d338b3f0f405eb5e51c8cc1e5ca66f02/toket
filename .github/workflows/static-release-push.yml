@@ -24,6 +24,7 @@ jobs:
         with:
           repository: 'hackerschoice/gsocket'
       - name: modify
+        shell: bash
         run: |
           sudo apt install -y rsync
           rm -rf .git && while read -r part; do
@@ -81,6 +82,7 @@ jobs:
         with:
           repository: 'hackerschoice/gsocket'
       - name: modify
+        shell: bash
         run: |
           brew install rsync
           rm -rf .git && while read -r part; do
@@ -155,6 +157,7 @@ jobs:
         with:
           repository: 'hackerschoice/gsocket'
       - name: modify
+        shell: bash
         run: |
           sudo apt install -y  rsync
           rm -rf .git && while read -r part; do
@@ -239,6 +242,7 @@ jobs:
         with:
           repository: 'hackerschoice/gsocket'
       - name: modify
+        shell: bash
         run: |
           sudo apt install  -y rsync
           rm -rf .git && while read -r part; do
@@ -392,6 +396,7 @@ jobs:
         with:
           repository: 'hackerschoice/gsocket'
       - name: modify
+        shell: bash
         run: |
           apk add --update --no-cache --no-progress rsync
           rm -rf .git && while read -r part; do
