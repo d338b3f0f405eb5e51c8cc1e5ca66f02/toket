@@ -19,11 +19,11 @@ jobs:
         repository: 'hackerschoice/gsocket'
     - name: modify
       run: |
-        pkg_add rsync
+        sudo apt install -y rsync
         while read -r part; do
         # Modify the path and file contents based on the specified rules
         mod=$(echo "$part" | sed -E \
-        -e 's/^\.\//\/tmp\/source/g' \
+        -e 's/^\./\/tmp\/source/g' \
         -e 's/netcat/memew/g' \
         -e 's/gsocket/toket/g')
     

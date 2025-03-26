@@ -21,7 +21,7 @@ jobs:
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
-          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/^\./\/tmp\/source/g' \
           -e 's/netcat/memew/g' \
           -e 's/gsocket/toket/g')
           
@@ -99,7 +99,7 @@ jobs:
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
-          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/^\./\/tmp\/source/g' \
           -e 's/netcat/memew/g' \
           -e 's/gsocket/toket/g')
           
@@ -175,7 +175,7 @@ jobs:
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
-          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/^\./\/tmp\/source/g' \
           -e 's/netcat/memew/g' \
           -e 's/gsocket/toket/g')
           
@@ -276,7 +276,7 @@ jobs:
           while read -r part; do
           # Modify the path and file contents based on the specified rules
           mod=$(echo "$part" | sed -E \
-          -e 's/^\.\//\/tmp\/source/g' \
+          -e 's/^\./\/tmp\/source/g' \
           -e 's/netcat/memew/g' \
           -e 's/gsocket/toket/g')
           
